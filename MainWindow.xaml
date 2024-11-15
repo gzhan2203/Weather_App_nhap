@@ -1,0 +1,338 @@
+﻿<Window x:Class="Weather.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:Weather.UserControls"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" FontFamily="Cambria"
+        Background="Transparent" mc:Ignorable="d" Height="685" Width="995">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Width="30" Height="29" Background="Transparent" BorderThickness="0" 
+                HorizontalAlignment="Right" VerticalAlignment="Top" 
+                Margin="0,8,8,0" Click="CloseButton_Click" Panel.ZIndex="10" Grid.Column="1">
+            <Image Source="/Images/close.png" Width="28" Height="27" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Button>
+
+        <!-- Button for Music -->
+        <Button Width="30" Height="30" Background="Transparent" BorderThickness="0"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="0,8,50,0" Click="MusicButton_Click" Panel.ZIndex="10" Grid.Column="1">
+            <Image Source="/Images/music.png" Width="28" Height="28"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Button>
+
+
+        <!-- Button for chuong -->
+        <Button Width="30" Height="30" Background="Transparent" BorderThickness="0"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="0,8,80,0" Click="ChuongButton_Click" Panel.ZIndex="10" Grid.Column="1">
+            <Image Source="/Images/chuông.png" Width="28" Height="28"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Button>
+
+        <!--Left Side-->
+        <Border CornerRadius="30 0 0 30" >
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/bg1.jpg" Stretch="UniformToFill" >
+                </ImageBrush>
+            </Border.Background>
+
+            <StackPanel>
+                <!--TextBox Search-->
+                <Border BorderBrush="#d9d9d9" BorderThickness="3" CornerRadius="15" HorizontalAlignment="Center" Width="200" Margin="0 35 0 0">
+                    <Grid Margin="7 7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Width="18" Height="18" Background="Transparent" BorderThickness="0" Click="btn_Search_Click">
+                            <Image Source="/Images/timkiem.png" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Button>
+                        <TextBox x:Name="txt_Search" Text="Search city..." 
+         FontWeight="Bold" Margin="5,0,55,0" 
+         Background="Transparent" Foreground="Gray" 
+         BorderBrush="{x:Null}" Grid.Column="1" 
+         FontSize="14" 
+         GotFocus="txt_Search_GotFocus" 
+         LostFocus="txt_Search_LostFocus"/>
+                    </Grid>
+                </Border>
+
+                <StackPanel Margin="50 60 0 0" >
+                    <Image Source="/Images/maynang.png" Width="140" HorizontalAlignment="Left" />
+                    <TextBlock x:Name="txt_main_temp" Text="12°c" FontSize="46" Margin="5 20 0 0" Foreground="LightBlue"/>
+                    <TextBlock x:Name="txt_datetime" Text="28 thg 10, 9:00 AM " FontSize="18" FontWeight="SemiBold" Margin="5 15 0 0" Foreground="LightBlue"/>
+                    <Separator Background="#dadada" Margin="0 30 40 30" Height="0.8"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/nhietdo.png" Margin="0 5 0 5" Width="34" Height="20"/>
+                        <TextBlock x:Name="txt_Temp" Text="29°c " FontSize="14" FontWeight="SemiBold" Margin="10 0 0 0" VerticalAlignment="Center" Foreground="LightBlue"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                        <Image Source="/Images/luongmua.png" Width="32" Height="20"/>
+                        <TextBlock x:Name="txt_icon_Humidity" Text="25%" FontSize="14" FontWeight="SemiBold" Foreground="LightBlue" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 5" Height="27">
+                        <Image Source="/Images/doam.png" Width="30" Height="20"/>
+                        <TextBlock x:Name="txt_icon_Cloud" Text="90%" FontSize="14" FontWeight="SemiBold" Foreground="LightBlue" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 15" Height="27">
+                        <Image Source="/Images/gio.png" Width="33" Height="20"/>
+                        <TextBlock x:Name="txt_icon_WindSpeed" Text="11 km/h" FontSize="14" FontWeight="SemiBold" Foreground="LightBlue" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border CornerRadius="15" Background="Black" Margin="30 0">
+                    <Border CornerRadius="15" Padding="0 30">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/Images/uit.jpg" Stretch="Fill" Opacity="0.65"/>
+                        </Border.Background>
+
+                        <TextBlock x:Name="txt_City" Text="Thủ Đức" Foreground="#FFFFFF" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                    </Border>
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+        <!--Right Side-->
+        <Border Grid.Column="1" CornerRadius="0 30 30 0" MouseDown="Border_MouseDown" >
+            <Border.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="/Images/bg2.jpg"/>
+            </Border.Background>
+
+
+
+            <StackPanel>
+                <!--Top Menu-->
+                <Grid Margin="40 30 40 10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Label Content="Week" Style="{StaticResource activeTextButton}" Margin="15,30,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15">
+                        <!--sign in-->
+                        <Button Width="63" Height="22" Click="SignIn_Click" Margin="0,0,5,0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="border" Background="#FF020D30" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF005D9C" />
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF007ACC" />
+
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <TextBlock Text="Sign In" FontWeight="Bold" Foreground="#FFFFFF" />
+                        </Button>
+                        <!--sign up-->
+                        <Button Width="63" Height="22" Click="Button_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="border" Background="#FF020D30" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF005D9C" />
+
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#FF007ACC" />
+
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                            <TextBlock Text="Sign Up" FontWeight="Bold" Foreground="#FFFFFF" />
+                        </Button>
+
+                    </StackPanel>
+
+
+                </Grid>
+
+                <!--Week Days-->
+                <StackPanel Orientation="Horizontal" Margin="40 20 0 20">
+                    <uc:CardDay Day="Mon" MaxNum="16°" MinNum="3°" Source="/Images/sun.png"/>
+                    <uc:CardDay Day="Tue" MaxNum="15°" MinNum="6°" Source="/Images/tuyet.png"/>
+                    <uc:CardDay Day="Wen" MaxNum="1°" MinNum="-10°" Source="/Images/snow.png"/>
+                    <uc:CardDay Day="Thu" MaxNum="7°" MinNum="-1°" Source="/Images/rain.png"/>
+                    <uc:CardDay Day="Fri" MaxNum="14°" MinNum="3°" Source="/Images/rain_cloud.png"/>
+                    <uc:CardDay Day="Sat" MaxNum="26°" MinNum="10°" Source="/Images/sun.png"/>
+                    <uc:CardDay Day="Sun" MaxNum="3°" MinNum="-3°" Source="/Images/storm.png"/>
+                </StackPanel>
+
+                <TabControl Width="677" BorderThickness="0" SelectionChanged="TabControl_SelectionChanged" BorderBrush="{x:Null}" Background="{x:Null}">
+
+
+
+                    <!-- Tab Highlight of the day -->
+                    <TabItem x:Name="tabItem" Header="Highlight of the day"  FontWeight="SemiBold" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}">
+                        <WrapPanel Height="409" Margin="0,0,-14,0">
+
+                            <!--Widget 1-->
+                            <Border Style="{StaticResource widgetBorder}" Width="202" Margin="15,15,12,0">
+                                <StackPanel>
+                                    <TextBlock Text="Pressure" Style="{StaticResource titleText}" Margin="0,0,0,40"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBox x:Name="txt_Pressure" Text="1005" FontSize="34" FontWeight="SemiBold" BorderBrush="{x:Null}"/>
+                                        <TextBlock Text="hPa" FontSize="14" VerticalAlignment="Bottom" Margin="5 0 0 3"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Average" FontSize="16" Margin="0,29.8,0,0"/>
+
+                                </StackPanel>
+                            </Border>
+
+                            <!--Widget 2-->
+                            <Border Style="{StaticResource widgetBorder}" Width="202" >
+                                <Grid>
+                                    <TextBlock Text="Wind speech" Style="{StaticResource titleText}"/>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBox x:Name="txt_WindSpeed" Text="7.70" FontSize="34" FontWeight="SemiBold" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                                        <TextBlock Text="m/s" FontSize="14" VerticalAlignment="Bottom" Margin="5 0 0 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                        <Image Source="/Images/dir.png" Width="25" Height="25" Margin="0 0 10 0"/>
+                                        <TextBlock Text="WSW" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                            <!--Widget 3-->
+                            <Border Style="{StaticResource widgetBorder}" BorderBrush="#03A9F4" Width="202" >
+                                <StackPanel>
+                                    <TextBlock Text="Sunrise Sunset" Style="{StaticResource titleText}"/>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 25 0 0">
+                                        <Image Source="/Images/sunrise.png" Width="40" Height="40" Margin="0 0 10 0"/>
+                                        <StackPanel>
+                                            <TextBox x:Name="txt_Sunrise" Text="6:35 AM" FontSize="16" FontWeight="SemiBold" BorderBrush="{x:Null}"/>
+                                            <TextBox Text="-1m 46s" FontSize="12" Margin="0 2 0 0" Foreground="#a0a0a0" BorderBrush="{x:Null}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 10 0 0">
+                                        <Image Source="/Images/sunset.png" Width="40" Height="40" Margin="0 0 10 0"/>
+                                        <StackPanel>
+                                            <TextBox x:Name="txt_Sunset" Text="5:12 AM" FontSize="16" FontWeight="SemiBold" BorderBrush="{x:Null}"/>
+                                            <TextBox Text="+2m 15s" FontSize="12" Margin="0 2 0 0" Foreground="#a0a0a0" BorderBrush="{x:Null}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <!--Widget 4-->
+                            <Border Style="{StaticResource widgetBorder}" Width="202" Margin="15,15,12,0">
+                                <Grid>
+                                    <TextBlock Text="Humidity" Style="{StaticResource titleText}"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBox x:Name="txt_Humidity" Text="56" FontSize="34" FontWeight="SemiBold" BorderBrush="{x:Null}"/>
+                                        <TextBlock Text="%" FontSize="14" VerticalAlignment="Bottom" Margin="5 0 0 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                        <TextBlock Text="Normal" FontWeight="SemiBold"/>
+                                        <Image Source="/Images/like.png" Width="18" Height="18" Margin="10 0 0 0"/>
+                                    </StackPanel>
+
+                                    <Slider Style="{DynamicResource SliderStyle1}" Value="5.5" Maximum="10" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="90"/>
+                                </Grid>
+                            </Border>
+                            <!--Widget 5-->
+                            <Border Style="{StaticResource widgetBorder}" Width="202">
+                                <Grid>
+                                    <TextBlock Text="Cloud" Style="{StaticResource titleText}"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBox x:Name="Cloud" Text="90" FontSize="34" FontWeight="SemiBold" BorderBrush="{x:Null}"/>
+                                        <TextBlock Text="%" FontSize="14" VerticalAlignment="Bottom" Margin="5 0 0 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                                        <TextBlock Text="high" FontWeight="SemiBold"/>
+                                        <Image Source="/Images/happy.png" Width="18" Height="18" Margin="10 0 0 0"/>
+                                    </StackPanel>
+
+                                    <Slider Style="{DynamicResource SliderStyle1}" Value="4" Maximum="10" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="90"/>
+                                </Grid>
+                            </Border>
+                            <!--Widget 6-->
+                            <Border Style="{StaticResource widgetBorder}" Width="202">
+                                <Grid>
+                                    <TextBlock Text="Detail" Style="{StaticResource titleText}"/>
+                                    <TextBox x:Name="txt_Detail" Text="It looks like it will be a warm and cloudy day!" 
+                                         FontSize="20" FontWeight="SemiBold" 
+                                         Margin="0 20 0 0" 
+                                         TextWrapping="Wrap" BorderBrush="{x:Null}"/>
+                                </Grid>
+                            </Border>
+
+                        </WrapPanel>
+                    </TabItem>
+                    <!--tab chat-->
+                    <TabItem Header="Chat" FontWeight="Bold" FontSize="16" BorderBrush="{x:Null}" Background="#FFC2DAFF">
+                        <Grid Margin="0 10 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Chat Messages Display with ScrollViewer -->
+                            <ScrollViewer Grid.Row="0" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                <TextBox x:Name="ChatMessagesDisplay"
+                                     IsReadOnly="True"
+                                     TextWrapping="Wrap"
+                                     Background="White"
+                                     Foreground="Black"
+                                     BorderThickness="0"
+                                     Padding="10"
+                                     VerticalScrollBarVisibility="Auto" 
+                                     HorizontalScrollBarVisibility="Disabled" Height="289" />
+                            </ScrollViewer>
+
+                            <!-- Chat Input and Send Button -->
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10,5,10,10">
+                                <!-- TextBox for Message Input -->
+                                <TextBox x:Name="MessageInput"
+                                         Width="562"
+                                         Height="59"
+                                         Margin="0,0,5,0"
+                                         TextChanged="MessageInput_TextChanged"
+                                         GotFocus="MessageInput_GotFocus"
+                                         LostFocus="MessageInput_LostFocus" HorizontalAlignment="Center"/>
+
+                                <!-- Placeholder for Message Input -->
+                                <TextBlock x:Name="MessageInputPlaceholder"
+                                               Foreground="Gray"
+                                               Margin="5,0,0,0"
+                                               VerticalAlignment="Center"
+                                               IsHitTestVisible="False"
+                                               Visibility="Visible"/>
+
+                                <!-- Send Button with Image -->
+                                <Button Width="57"  Height="55" VerticalAlignment="Center"  Click="SendMessage_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <Image Source="Images/send.png"  Stretch="Uniform"  ToolTip="Send" Height="44" Width="46" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+
+
+
+                </TabControl>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
